@@ -9,10 +9,12 @@ sep = "separator"
 
 operators = ['<', '>', '+', '-', '=']
 separator = ['(', ')', ';']
-keywords = ['while']
+
+# def write_data(filename, input):
+#     with open(filename, 'w') as f:
+#         json.dump(input, f, separators='\n')
 
 def lexer(filename):
-
     try:
         with open(filename, 'r') as f:
             display =   "token             lexeme   \n"
@@ -57,10 +59,15 @@ def lexer(filename):
                         new = ""
                     elif len(new) != 0:
                         display +=  f"{id:18}{new:9}\n"
-                        new = ""      
+                        new = ""
+            output_file = open("output.txt", "a")
+            output_file.write(display)
+            output_file.close()
+            f.close()
     except FileNotFoundError:
         return "{filename} not found"
-    f.close()
     return display
 
+
 print(lexer("input_scode.txt"))
+# write_data("output.txt", input=l)
